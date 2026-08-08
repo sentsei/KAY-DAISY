@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Love You ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+}
+
+.container {
+    text-align: center;
+    z-index: 10;
+}
+
+input {
+    width: 280px;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+#message {
+    display: none;
+    margin-top: 30px;
+    color: white;
+    font-size: 55px;
+    font-weight: bold;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #ff1744,
+        0 0 40px #ff1744;
+    animation: pop 0.8s ease;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0);
+    }
+
+    70% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.heart {
+    position: fixed;
+    bottom: -50px;
+    pointer-events: none;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <input
+        type="text"
+        id="input"
+        placeholder="Press Enter..."
+    >
+
+    <div id="message">
+        100K I LOVE YOU ❤️
+    </div>
+
+</div>
+
+<script>
+const input = document.getElementById("input");
+const message = document.getElementById("message");
+
+let heartInterval;
+
+input.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+
+        message.style.display = "block";
+        input.style.display = "none";
+
+        if (!heartInterval) {
+            heartInterval = setInterval(createHeart, 150);
+        }
+    }
+});
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.classList.add("heart");
+
+    heart.innerHTML = "❤️";
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    const size =
+        Math.random() * 35 + 15;
+
+    heart.style.fontSize =
+        size + "px";
+
+    const duration =
+        Math.random() * 4 + 3;
+
+    heart.style.animationDuration =
+        duration + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, duration * 1000);
+}
+</script>
+
+</body>
+</html>
